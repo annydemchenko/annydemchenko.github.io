@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Анна Демченко — SMM-стратег</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream: #F5F0E8;
+    --cream-dark: #EDE6D6;
+    --stone: #2C2820;
+    --stone-mid: #5C544A;
+    --stone-light: #9C9085;
+    --sky: #7BA3B8;
+    --sky-light: #B8D0DC;
+    --snow: #FFFFFF;
+    --accent: #4A7A8A;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--cream);
+    color: var(--stone);
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 6rem 8vw;
+    position: relative;
+    background: var(--stone);
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 70% 40%, rgba(123,163,184,0.15) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 80% at 20% 80%, rgba(74,122,138,0.1) 0%, transparent 50%);
+  }
+
+  .hero-eyebrow {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--sky-light);
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.2s forwards;
+  }
+
+  .hero-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(52px, 8vw, 96px);
+    font-weight: 300;
+    color: var(--cream);
+    line-height: 1.0;
+    margin-bottom: 0.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.4s forwards;
+  }
+
+  .hero-name em {
+    font-style: italic;
+    color: var(--sky-light);
+  }
+
+  .hero-role {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(18px, 2.5vw, 26px);
+    font-weight: 300;
+    color: var(--stone-light);
+    margin-bottom: 2.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.6s forwards;
+  }
+
+  .hero-bio {
+    max-width: 560px;
+    font-size: 15px;
+    line-height: 1.8;
+    color: rgba(245,240,232,0.7);
+    margin-bottom: 3rem;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.8s forwards;
+  }
+
+  .hero-contacts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 1s forwards;
+  }
+
+  .hero-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--sky-light);
+    text-decoration: none;
+    border: 0.5px solid rgba(184,208,220,0.3);
+    border-radius: 100px;
+    padding: 8px 18px;
+    transition: all 0.25s;
+    letter-spacing: 0.02em;
+  }
+
+  .hero-link:hover {
+    background: rgba(123,163,184,0.15);
+    border-color: rgba(184,208,220,0.6);
+    color: var(--snow);
+  }
+
+  .hero-scroll {
+    position: absolute;
+    bottom: 2.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    color: var(--stone-light);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 1.4s forwards;
+  }
+
+  .scroll-line {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, var(--stone-light), transparent);
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+
+  /* SECTIONS */
+  section {
+    padding: 6rem 8vw;
+  }
+
+  .section-label {
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--stone-light);
+    margin-bottom: 3rem;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    max-width: 60px;
+    height: 0.5px;
+    background: var(--stone-light);
+  }
+
+  /* METRICS */
+  .metrics-section {
+    background: var(--stone);
+    color: var(--cream);
+  }
+
+  .metrics-section .section-label {
+    color: var(--stone-light);
+  }
+
+  .metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1px;
+    background: rgba(255,255,255,0.06);
+    border: 0.5px solid rgba(255,255,255,0.06);
+  }
+
+  .metric-card {
+    background: var(--stone);
+    padding: 2.5rem 2rem;
+    position: relative;
+    transition: background 0.25s;
+  }
+
+  .metric-card:hover {
+    background: #3a332b;
+  }
+
+  .metric-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(40px, 5vw, 60px);
+    font-weight: 300;
+    color: var(--sky-light);
+    line-height: 1;
+    margin-bottom: 10px;
+  }
+
+  .metric-desc {
+    font-size: 13px;
+    color: rgba(245,240,232,0.55);
+    line-height: 1.5;
+  }
+
+  /* CASES */
+  .cases-section {
+    background: var(--cream-dark);
+  }
+
+  .case-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .case-item {
+    background: var(--cream);
+    padding: 2.5rem;
+    cursor: default;
+    transition: background 0.2s;
+    border-left: 2px solid transparent;
+    transition: all 0.25s;
+  }
+
+  .case-item:hover {
+    background: var(--snow);
+    border-left-color: var(--sky);
+    padding-left: 2.8rem;
+  }
+
+  .case-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 1rem;
+  }
+
+  .case-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 400;
+    color: var(--stone);
+    line-height: 1.2;
+  }
+
+  .case-badge {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    border: 0.5px solid var(--sky-light);
+    border-radius: 100px;
+    padding: 4px 12px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .case-body {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  @media (max-width: 700px) {
+    .case-body { grid-template-columns: 1fr; }
+  }
+
+  .case-col-label {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--stone-light);
+    margin-bottom: 6px;
+  }
+
+  .case-col-text {
+    font-size: 14px;
+    color: var(--stone-mid);
+    line-height: 1.6;
+  }
+
+  .case-results {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 1rem;
+  }
+
+  .result-pill {
+    font-size: 12px;
+    background: rgba(123,163,184,0.12);
+    color: var(--accent);
+    border-radius: 100px;
+    padding: 4px 14px;
+    border: 0.5px solid rgba(123,163,184,0.3);
+  }
+
+  .case-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .case-link {
+    font-size: 13px;
+    color: var(--stone-light);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: color 0.2s;
+  }
+
+  .case-link:hover { color: var(--accent); }
+
+  .case-link svg {
+    width: 12px;
+    height: 12px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    flex-shrink: 0;
+  }
+
+  /* REVIEWS */
+  .reviews-section {
+    background: var(--cream-dark);
+    padding: 6rem 8vw;
+  }
+
+  .reviews-intro {
+    font-size: 15px;
+    color: var(--stone-mid);
+    max-width: 520px;
+    margin-bottom: 2.5rem;
+    line-height: 1.7;
+  }
+
+  .reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    align-items: start;
+  }
+
+  @media (max-width: 700px) {
+    .reviews-grid { grid-template-columns: 1fr 1fr; }
+  }
+
+  @media (max-width: 440px) {
+    .reviews-grid { grid-template-columns: 1fr; }
+  }
+
+  .review-card {
+    border-radius: var(--border-radius-lg, 12px);
+    overflow: hidden;
+    border: 0.5px solid rgba(92,84,74,0.15);
+    background: var(--cream);
+    transition: transform 0.25s, box-shadow 0.25s;
+    cursor: zoom-in;
+  }
+
+  .review-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 32px rgba(44,40,32,0.12);
+  }
+
+  .review-card img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* Lightbox */
+  .lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(30,26,20,0.92);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    cursor: zoom-out;
+  }
+
+  .lightbox.open { display: flex; }
+
+  .lightbox img {
+    max-width: 90vw;
+    max-height: 90vh;
+    border-radius: 8px;
+    object-fit: contain;
+    box-shadow: 0 24px 80px rgba(0,0,0,0.5);
+  }
+
+  .lightbox-close {
+    position: fixed;
+    top: 1.5rem;
+    right: 1.5rem;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.1);
+    border: 0.5px solid rgba(255,255,255,0.2);
+    color: white;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .lightbox-close:hover { background: rgba(255,255,255,0.2); }
+
+  /* SKILLS */
+  .skills-section {
+    background: var(--cream);
+  }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .skill-group {
+    border-top: 0.5px solid var(--stone-light);
+    padding-top: 1.25rem;
+  }
+
+  .skill-group-title {
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--stone-light);
+    margin-bottom: 12px;
+  }
+
+  .skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .skill-tag {
+    font-size: 13px;
+    color: var(--stone-mid);
+    background: var(--cream-dark);
+    border-radius: 4px;
+    padding: 4px 10px;
+  }
+
+  /* EXPERIENCE */
+  .exp-section {
+    background: var(--stone);
+    color: var(--cream);
+  }
+
+  .exp-section .section-label { color: var(--stone-light); }
+
+  .exp-list { display: flex; flex-direction: column; }
+
+  .exp-item {
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    gap: 2rem;
+    padding: 2rem 0;
+    border-bottom: 0.5px solid rgba(255,255,255,0.07);
+  }
+
+  @media (max-width: 600px) {
+    .exp-item { grid-template-columns: 1fr; gap: 0.5rem; }
+  }
+
+  .exp-period {
+    font-size: 12px;
+    color: var(--stone-light);
+    padding-top: 3px;
+    letter-spacing: 0.03em;
+  }
+
+  .exp-right {}
+
+  .exp-company {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 400;
+    color: var(--cream);
+    margin-bottom: 2px;
+  }
+
+  .exp-role {
+    font-size: 13px;
+    color: var(--sky-light);
+    margin-bottom: 8px;
+    letter-spacing: 0.02em;
+  }
+
+  .exp-desc {
+    font-size: 14px;
+    color: rgba(245,240,232,0.55);
+    line-height: 1.7;
+  }
+
+  /* QUOTE */
+  .quote-section {
+    background: var(--sky);
+    padding: 5rem 8vw;
+    text-align: center;
+  }
+
+  .quote-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(22px, 3.5vw, 38px);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--snow);
+    max-width: 700px;
+    margin: 0 auto 1.5rem;
+    line-height: 1.4;
+  }
+
+  .quote-author {
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.65);
+  }
+
+  /* FOOTER */
+  footer {
+    background: #1E1A14;
+    padding: 3rem 8vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .footer-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 300;
+    color: var(--cream);
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 20px;
+  }
+
+  .footer-link {
+    font-size: 13px;
+    color: var(--stone-light);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .footer-link:hover { color: var(--sky-light); }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 1; }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-eyebrow">SMM-стратег · Индустрия гостеприимства</div>
+  <h1 class="hero-name">Анна<br><em>Демченко</em></h1>
+  <div class="hero-role">Контент. Комьюнити. Голос бренда.</div>
+  <p class="hero-bio">
+    Строю живое присутствие брендов в соцсетях — не просто контент, а ощущение. 4 года в профессии, 2 года на курорте «Архыз». За это время соцсети ожили: появился авторский голос, система и сообщество, которого нет ни у одного конкурента.
+  </p>
+  <div class="hero-contacts">
+    <a href="https://t.me/hannietty" class="hero-link">
+      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="m22 2-7 20-4-9-9-4 20-7z"/><path d="M22 2 11 13"/></svg>
+      Telegram
+    </a>
+    <a href="https://www.instagram.com/hannietty" class="hero-link">
+      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></svg>
+      Instagram
+    </a>
+    <span class="hero-link" style="cursor:default;">
+      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+      Архыз · удалённо
+    </span>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    прокрутить
+  </div>
+</section>
+
+<!-- METRICS -->
+<section class="metrics-section">
+  <div class="section-label">Результаты в цифрах</div>
+  <div class="metrics-grid reveal">
+    <div class="metric-card">
+      <div class="metric-number">4 790</div>
+      <div class="metric-desc">участников в TG-чате курорта — в 4× больше, чем у Розы Хутор (1 184)</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-number">+47%</div>
+      <div class="metric-desc">рост ВКонтакте за 2 года: 40 тыс. → 59 тыс. подписчиков</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-number">5</div>
+      <div class="metric-desc">платформ веду самостоятельно: Instagram, VK, Telegram, VK Max, Threads</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-number">100%</div>
+      <div class="metric-desc">переход с чужого UGC на авторский контент собственного производства</div>
+    </div>
+  </div>
+</section>
+
+<!-- CASES -->
+<section class="cases-section">
+  <div class="section-label">Кейсы</div>
+  <div class="case-list">
+
+    <div class="case-item reveal">
+      <div class="case-top">
+        <div class="case-title">Курорт «Архыз» — комьюнити и голос бренда</div>
+        <div class="case-badge">Флагманский</div>
+      </div>
+      <div class="case-body">
+        <div>
+          <div class="case-col-label">Задача</div>
+          <div class="case-col-text">Выстроить живое присутствие всесезонного курорта в соцсетях. До прихода — хаотичный контент, преимущественно репосты UGC от гостей, отсутствие единого голоса.</div>
+        </div>
+        <div>
+          <div class="case-col-label">Действия</div>
+          <div class="case-col-text">Разработала контент-стратегию, tone of voice, рубрикатор. Ежедневный авторский контент. Запустила TG-чат гостей. Внедрила прогревы к мероприятиям, культуру катания, закулисье, маскота. Продажа и маркировка рекламы партнёров. Выход на федеральный уровень — 5 роликов для дайджеста Канта.</div>
+        </div>
+        <div>
+          <div class="case-col-label">Итог</div>
+          <div class="case-col-text">Сообщество в 4 790 человек без сезонных провалов. Гости возвращаются в том числе из-за атмосферы в чате — это отражается в отзывах.</div>
+        </div>
+      </div>
+      <div class="case-results">
+        <span class="result-pill">Чат №1 среди горнолыжных курортов РФ</span>
+        <span class="result-pill">ВКонтакте +47% за 2 года</span>
+        <span class="result-pill">Instagram 109К в условиях блокировок</span>
+        <span class="result-pill">Снижение негатива в комьюнити</span>
+      </div>
+      <div class="case-links">
+        <a href="https://t.me/resortarkhyz/6878" class="case-link" target="_blank">
+          <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          Пост «Горы — лучшая терапия»
+        </a>
+        <a href="https://t.me/resortarkhyz/6797" class="case-link" target="_blank">
+          <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          Ролик-благодарность сезона
+        </a>
+        <a href="https://youtu.be/IxVp0qPQYq4" class="case-link" target="_blank">
+          <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          Дайджест Канта — съёмка
+        </a>
+      </div>
+    </div>
+
+    <div class="case-item reveal">
+      <div class="case-top">
+        <div class="case-title">Отель «Лазурит» + ресторан «Лезгинка» — запуск с нуля</div>
+        <div class="case-badge">Запуск бренда</div>
+      </div>
+      <div class="case-body">
+        <div>
+          <div class="case-col-label">Задача</div>
+          <div class="case-col-text">Вывести новый отель и ресторан на курорте в digital — без аудитории, без контента, без истории бренда.</div>
+        </div>
+        <div>
+          <div class="case-col-label">Действия</div>
+          <div class="case-col-text">Написала легенду для названия отеля. Завела все площадки с нуля. Снимала и монтировала контент самостоятельно. Организовала розыгрыш совместно с курортом. Привлекла блогеров для первичного охвата.</div>
+        </div>
+        <div>
+          <div class="case-col-label">Итог</div>
+          <div class="case-col-text">За 4 месяца: Instagram 0 → 1 000, Telegram 0 → 400. Сент. 2025 — янв. 2026.</div>
+        </div>
+      </div>
+      <div class="case-results">
+        <span class="result-pill">Instagram 0 → 1 000</span>
+        <span class="result-pill">Telegram 0 → 400</span>
+        <span class="result-pill">4 месяца с нуля</span>
+      </div>
+      <div class="case-links">
+        <a href="https://lazuritarkhyz.ru" class="case-link" target="_blank">
+          <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          lazuritarkhyz.ru
+        </a>
+      </div>
+    </div>
+
+    <div class="case-item reveal">
+      <div class="case-top">
+        <div class="case-title">iCleaner, EGO BOTTEGO, MANEKEN BRAND</div>
+        <div class="case-badge">Fashion · Beauty</div>
+      </div>
+      <div class="case-body">
+        <div>
+          <div class="case-col-label">Контекст</div>
+          <div class="case-col-text">SMM и онлайн-продажи для fashion и beauty брендов: российская nano-косметика для обуви и итальянские украшения с острова Мурано.</div>
+        </div>
+        <div>
+          <div class="case-col-label">Опыт</div>
+          <div class="case-col-text">Ведение соцсетей, инфлюенс-маркетинг, коммуникация с аудиторией. Работа с голосом бренда в кризисный период московских локдаунов 2020–2021.</div>
+        </div>
+        <div>
+          <div class="case-col-label">Ценность</div>
+          <div class="case-col-text">Опыт работы в условиях неопределённости: как удержать аудиторию и не потерять бизнес, когда офлайн закрыт.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- QUOTE -->
+<section class="quote-section">
+  <div class="quote-text">"С твоим появлением наши социальные сети по-настоящему ожили, заиграли новыми красками и наполнились уютом. Благодаря тебе курорт стал для тысяч людей ещё ближе, теплее и знакомее."</div>
+  <div class="quote-author">— коллеги, команда курорта «Архыз»</div>
+</section>
+
+<!-- REVIEWS -->
+<section class="reviews-section">
+  <div class="section-label">Говорят обо мне</div>
+  <p class="reviews-intro">Гости чата курорта, коллеги и команда — в их словах лучше всего видно, что значит выстроить живое комьюнити.</p>
+  <div class="reviews-grid reveal">
+    <div class="review-card tall">
+      <img src="review_1.jpg" alt="Отзыв гостя про памятник при жизни" loading="lazy">
+    </div>
+    <div class="review-card">
+      <img src="review_3.png" alt="Отзыв гостя про админов чата" loading="lazy">
+    </div>
+    <div class="review-card">
+      <img src="review_4.png" alt="Гость узнал секретного админа" loading="lazy">
+    </div>
+    <div class="review-card tall">
+      <img src="review_2.png" alt="Поздравление от команды курорта" loading="lazy">
+    </div>
+    <div class="review-card">
+      <img src="review_5.png" alt="Благодарность Сергея" loading="lazy">
+    </div>
+    <div class="review-card">
+      <img src="review_6.png" alt="Комментарии под постом про горы" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section class="skills-section">
+  <div class="section-label">Навыки</div>
+  <div class="skills-grid reveal">
+    <div class="skill-group">
+      <div class="skill-group-title">Стратегия и контент</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Контент-стратегия</span>
+        <span class="skill-tag">Tone of Voice</span>
+        <span class="skill-tag">Контент-план</span>
+        <span class="skill-tag">Рубрикатор</span>
+        <span class="skill-tag">Сценарии роликов</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">Копирайтинг</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Тексты для соцсетей</span>
+        <span class="skill-tag">УТП и офферы</span>
+        <span class="skill-tag">Слоганы и акции</span>
+        <span class="skill-tag">Навигация и среда</span>
+        <span class="skill-tag">Легенда бренда</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">Производство</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Съёмка</span>
+        <span class="skill-tag">Монтаж</span>
+        <span class="skill-tag">Работа в кадре</span>
+        <span class="skill-tag">Figma</span>
+        <span class="skill-tag">Брендбук</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">Комьюнити</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Управление чатом</span>
+        <span class="skill-tag">Работа с негативом</span>
+        <span class="skill-tag">Конкурсы</span>
+        <span class="skill-tag">Инфлюенс-маркетинг</span>
+        <span class="skill-tag">Маркировка рекламы</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">Аналитика и инструменты</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Livedune</span>
+        <span class="skill-tag">AI-ассистенты</span>
+        <span class="skill-tag">Кросспостинг</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">Платформы</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Instagram</span>
+        <span class="skill-tag">Telegram</span>
+        <span class="skill-tag">VK</span>
+        <span class="skill-tag">VK Max</span>
+        <span class="skill-tag">Threads</span>
+        <span class="skill-tag">Яндекс Ритм</span>
+        <span class="skill-tag">Pinterest</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section class="exp-section">
+  <div class="section-label">Опыт</div>
+  <div class="exp-list">
+    <div class="exp-item reveal">
+      <div class="exp-period">Июнь 2024 — н.в.</div>
+      <div class="exp-right">
+        <div class="exp-company">Курорт «Архыз»</div>
+        <div class="exp-role">SMM-специалист</div>
+        <div class="exp-desc">Веду 5 площадок самостоятельно. Создаю весь контент: пишу, снимаю, монтирую. Отвечаю за маркетинговый копирайтинг отдела — УТП, слоганы, офферы для рекламных кампаний, навигация курорта. Строю и модерирую комьюнити 4 790+ гостей. Параллельно запустила соцсети нового отеля «Лазурит» и ресторана «Лезгинка».</div>
+      </div>
+    </div>
+    <div class="exp-item reveal">
+      <div class="exp-period">2022 — 2024</div>
+      <div class="exp-right">
+        <div class="exp-company">iCleaner · EGO BOTTEGO</div>
+        <div class="exp-role">SMM-специалист (фриланс)</div>
+        <div class="exp-desc">Ведение соцсетей российских брендов в нише косметики для обуви и итальянских украшений. Контент, дизайн, инфлюенс-маркетинг.</div>
+      </div>
+    </div>
+    <div class="exp-item reveal">
+      <div class="exp-period">2021 — 2022</div>
+      <div class="exp-right">
+        <div class="exp-company">MANEKEN BRAND</div>
+        <div class="exp-role">Менеджер онлайн-продаж</div>
+        <div class="exp-desc">Онлайн-продажи через соцсети, коммуникация с клиентами, голос бренда, инфлюенс-маркетинг в период московских локдаунов.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-name">Анна Демченко</div>
+  <div class="footer-links">
+    <a href="https://t.me/hannietty" class="footer-link">Telegram</a>
+    <a href="https://www.instagram.com/hannietty" class="footer-link">Instagram</a>
+  </div>
+</footer>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox">
+  <div class="lightbox-close" id="lightboxClose">✕</div>
+  <img src="" id="lightboxImg" alt="">
+</div>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightboxImg');
+  const lightboxClose = document.getElementById('lightboxClose');
+
+  document.querySelectorAll('.review-card img').forEach(img => {
+    img.addEventListener('click', () => {
+      lightboxImg.src = img.src;
+      lightboxImg.alt = img.alt;
+      lightbox.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    });
+  });
+
+  function closeLightbox() {
+    lightbox.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox || e.target === lightboxClose) closeLightbox();
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeLightbox();
+  });
+</script>
+
+</body>
+</html>
