@@ -349,51 +349,76 @@
 
   /* REVIEWS */
   .reviews-section {
-    background: var(--cream-dark);
-    padding: 6rem 8vw;
+    background: var(--stone);
+    padding: 6rem 0 6rem 8vw;
+    overflow: hidden;
   }
+
+  .reviews-section .section-label { color: var(--stone-light); margin-right: 8vw; }
 
   .reviews-intro {
     font-size: 15px;
-    color: var(--stone-mid);
+    color: rgba(245,240,232,0.55);
     max-width: 520px;
     margin-bottom: 2.5rem;
     line-height: 1.7;
   }
 
-  .reviews-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
-    align-items: start;
+  .reviews-slider {
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding-right: 8vw;
+    padding-bottom: 4px;
   }
 
-  @media (max-width: 700px) {
-    .reviews-grid { grid-template-columns: 1fr 1fr; }
-  }
+  .reviews-slider::-webkit-scrollbar { display: none; }
 
-  @media (max-width: 440px) {
-    .reviews-grid { grid-template-columns: 1fr; }
-  }
-
-  .review-card {
-    border-radius: var(--border-radius-lg, 12px);
+  .review-phone {
+    flex: 0 0 200px;
+    scroll-snap-align: start;
+    background: #1a1814;
+    border-radius: 28px;
+    border: 5px solid #3a3530;
     overflow: hidden;
-    border: 0.5px solid rgba(92,84,74,0.15);
-    background: var(--cream);
-    transition: transform 0.25s, box-shadow 0.25s;
     cursor: zoom-in;
+    transition: transform 0.25s;
   }
 
-  .review-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 12px 32px rgba(44,40,32,0.12);
-  }
+  .review-phone:hover { transform: translateY(-4px); }
 
-  .review-card img {
+  .review-phone img {
     width: 100%;
-    height: auto;
+    height: 360px;
+    object-fit: cover;
+    object-position: top;
     display: block;
+  }
+
+  .reviews-nav {
+    display: flex;
+    gap: 10px;
+    margin-top: 1.5rem;
+  }
+
+  .reviews-nav-btn {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    border: 0.5px solid rgba(255,255,255,0.15);
+    background: transparent;
+    color: var(--sky-light);
+    font-size: 18px;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.2s;
+  }
+
+  .reviews-nav-btn:hover {
+    background: rgba(123,163,184,0.15);
+    border-color: rgba(184,208,220,0.4);
   }
 
   /* Lightbox */
@@ -774,25 +799,29 @@
 <section class="reviews-section">
   <div class="section-label">Говорят обо мне</div>
   <p class="reviews-intro">Гости чата курорта, коллеги и команда — в их словах лучше всего видно, что значит выстроить живое комьюнити.</p>
-  <div class="reviews-grid reveal">
-    <div class="review-card tall">
+  <div class="reviews-slider reveal" id="reviewsSlider">
+    <div class="review-phone">
       <img src="review_1.jpg" alt="Отзыв гостя про памятник при жизни" loading="lazy">
     </div>
-    <div class="review-card">
-      <img src="review_3.png" alt="Отзыв гостя про админов чата" loading="lazy">
-    </div>
-    <div class="review-card">
-      <img src="review_4.png" alt="Гость узнал секретного админа" loading="lazy">
-    </div>
-    <div class="review-card tall">
+    <div class="review-phone">
       <img src="review_2.png" alt="Поздравление от команды курорта" loading="lazy">
     </div>
-    <div class="review-card">
+    <div class="review-phone">
+      <img src="review_3.png" alt="Отзыв гостя про админов чата" loading="lazy">
+    </div>
+    <div class="review-phone">
+      <img src="review_4.png" alt="Гость узнал секретного админа" loading="lazy">
+    </div>
+    <div class="review-phone">
       <img src="review_5.png" alt="Благодарность Сергея" loading="lazy">
     </div>
-    <div class="review-card">
+    <div class="review-phone">
       <img src="review_6.png" alt="Комментарии под постом про горы" loading="lazy">
     </div>
+  </div>
+  <div class="reviews-nav">
+    <button class="reviews-nav-btn" id="revPrev" aria-label="Назад">←</button>
+    <button class="reviews-nav-btn" id="revNext" aria-label="Вперёд">→</button>
   </div>
 </section>
 
@@ -921,11 +950,19 @@
   }, { threshold: 0.1 });
   reveals.forEach(el => observer.observe(el));
 
+  const slider = document.getElementById('reviewsSlider');
+  document.getElementById('revNext').addEventListener('click', () => {
+    slider.scrollBy({ left: 232, behavior: 'smooth' });
+  });
+  document.getElementById('revPrev').addEventListener('click', () => {
+    slider.scrollBy({ left: -232, behavior: 'smooth' });
+  });
+
   const lightbox = document.getElementById('lightbox');
   const lightboxImg = document.getElementById('lightboxImg');
   const lightboxClose = document.getElementById('lightboxClose');
 
-  document.querySelectorAll('.review-card img').forEach(img => {
+  document.querySelectorAll('.review-phone img').forEach(img => {
     img.addEventListener('click', () => {
       lightboxImg.src = img.src;
       lightboxImg.alt = img.alt;
