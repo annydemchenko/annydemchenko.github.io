@@ -32,19 +32,39 @@
   }
 
   /* AVATAR */
+  .hero-inner {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 3rem;
+    align-items: center;
+    width: 100%;
+    max-width: 760px;
+  }
+
   .hero-photo-wrap {
-    margin-bottom: 1.5rem;
     opacity: 0;
     animation: fadeUp 0.8s ease 0.3s forwards;
   }
 
   .hero-avatar {
-    width: 88px;
-    height: 88px;
-    border-radius: 50%;
+    width: 100%;
+    aspect-ratio: 3/4;
+    border-radius: 12px;
     object-fit: cover;
     object-position: center top;
-    border: 2px solid rgba(184,208,220,0.3);
+    border: 1px solid rgba(184,208,220,0.15);
+    display: block;
+  }
+
+  .hero-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  @media (max-width: 600px) {
+    .hero-inner { grid-template-columns: 1fr; }
+    .hero-avatar { aspect-ratio: 4/3; }
   }
 
   /* HERO */
@@ -655,27 +675,31 @@
 <!-- HERO -->
 <section class="hero">
   <div class="hero-eyebrow">SMM-стратег · Туризм и индустрия гостеприимства</div>
-  <div class="hero-photo-wrap">
-    <img src="photo_main.jpg" alt="Анна Демченко" class="hero-avatar">
-  </div>
-  <h1 class="hero-name">Анна<br><em>Демченко</em></h1>
-  <div class="hero-role">Контент. Комьюнити. Голос бренда.</div>
-  <p class="hero-bio">
-    Создаю бренд-медиа, которое превращает интерес в импульс к покупке. 4 года в профессии, 2 года на горнолыжном курорте «Архыз» — продукте с высоким чеком, где решение о покупке рождается в том числе из ощущения, а не только из характеристик. Разработала редакционную систему, голос бренда и взрастила комьюнити 4 790 человек.
-  </p>
-  <div class="hero-contacts">
-    <a href="https://t.me/hannietty" class="hero-link">
-      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="m22 2-7 20-4-9-9-4 20-7z"/><path d="M22 2 11 13"/></svg>
-      Telegram
-    </a>
-    <a href="https://www.instagram.com/hannietty" class="hero-link">
-      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></svg>
-      Instagram
-    </a>
-    <span class="hero-link" style="cursor:default;">
-      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
-      Архыз · удалённо
-    </span>
+  <div class="hero-inner">
+    <div class="hero-photo-wrap">
+      <img src="photo_main.jpg" alt="Анна Демченко" class="hero-avatar">
+    </div>
+    <div class="hero-text">
+      <h1 class="hero-name">Анна<br><em>Демченко</em></h1>
+      <div class="hero-role">Контент. Комьюнити. Голос бренда.</div>
+      <p class="hero-bio">
+        Создаю бренд-медиа, которое превращает интерес в импульс к покупке. 4 года в профессии, 2 года на горнолыжном курорте «Архыз» — продукте с высоким чеком, где решение о покупке рождается в том числе из ощущения, а не только из характеристик. Разработала редакционную систему, голос бренда и взрастила комьюнити 4 790 человек.
+      </p>
+      <div class="hero-contacts">
+        <a href="https://t.me/hannietty" class="hero-link">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="m22 2-7 20-4-9-9-4 20-7z"/><path d="M22 2 11 13"/></svg>
+          Telegram
+        </a>
+        <a href="https://www.instagram.com/hannietty" class="hero-link">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></svg>
+          Instagram
+        </a>
+        <span class="hero-link" style="cursor:default;">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+          Архыз · удалённо
+        </span>
+      </div>
+    </div>
   </div>
   <div class="hero-scroll">
     <div class="scroll-line"></div>
